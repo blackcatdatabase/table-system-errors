@@ -99,8 +99,8 @@ erDiagram
     DATETIME(6) created_at
     DATETIME(6) last_seen
   }
-  SYSTEM_ERRORS }o--|| USERS : (resolved_by)
-  SYSTEM_ERRORS }o--|| USERS : (user_id)
+  SYSTEM_ERRORS }o--|| USERS : "resolved_by"
+  SYSTEM_ERRORS }o--|| USERS : "user_id"
 ```
 
 ## Indexes
