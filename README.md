@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-> Schema package for table **system_errors** (repo: $slug).
+> Schema package for table **system_errors** (repo: `system-errors`).
 
 ## Files
 ```
@@ -41,7 +41,7 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 | Column | Type | Null | Default | Extra |
 |-------:|:-----|:----:|:--------|:------|
 | id | BIGINT UNSIGNED | — | — | AUTO_INCREMENT, PK |
-| level | ENUM(''notice'',''warning'',''error'',''critical'') | NO | — |  |
+| level | ENUM('notice','warning','error','critical') | NO | — |  |
 | message | TEXT | NO | — |  |
 | exception_class | VARCHAR(255) | YES | — |  |
 | file | VARCHAR(1024) | YES | — |  |
@@ -73,31 +73,31 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 ```mermaid
 erDiagram
   SYSTEM_ERRORS {
-    BIGINT id PK
-    ENUM(''notice'',''warning'',''error'',''critical'') level
-    TEXT message
-    VARCHAR(255) exception_class
-    VARCHAR(1024) file
+    INT id PK
+    ENUM level
+    VARCHAR message
+    VARCHAR exception_class
+    VARCHAR file
     INT line
-    MEDIUMTEXT stack_trace
-    VARCHAR(255) token
+    VARCHAR stack_trace
+    VARCHAR token
     JSON context
-    VARCHAR(64) fingerprint
+    VARCHAR fingerprint
     INT occurrences
-    BIGINT user_id
-    BINARY(32) ip_hash
-    VARCHAR(64) ip_hash_key_version
-    VARCHAR(45) ip_text
-    VARBINARY(16) ip_bin
-    VARCHAR(1024) user_agent
-    VARCHAR(2048) url
-    VARCHAR(10) method
-    SMALLINT http_status
+    INT user_id
+    BLOB ip_hash
+    VARCHAR ip_hash_key_version
+    VARCHAR ip_text
+    BLOB ip_bin
+    VARCHAR user_agent
+    VARCHAR url
+    VARCHAR method
+    INT http_status
     BOOLEAN resolved
-    BIGINT resolved_by
-    DATETIME(6) resolved_at
-    DATETIME(6) created_at
-    DATETIME(6) last_seen
+    INT resolved_by
+    DATETIME resolved_at
+    DATETIME created_at
+    DATETIME last_seen
   }
   SYSTEM_ERRORS }o--|| USERS : "resolved_by"
   SYSTEM_ERRORS }o--|| USERS : "user_id"
