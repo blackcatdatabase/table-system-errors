@@ -2,7 +2,7 @@
 -- table: system_errors
 CREATE TABLE IF NOT EXISTS system_errors (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  level ENUM(''notice'',''warning'',''error'',''critical'') NOT NULL,
+  level ENUM('notice','warning','error','critical') NOT NULL,
   message TEXT NOT NULL,
   exception_class VARCHAR(255) NULL,
   file VARCHAR(1024) NULL,
