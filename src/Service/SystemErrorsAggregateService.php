@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace BlackCat\Database\Packages\SystemErrors\Service;
 
-use BlackCat\Core\Database\Database;
+use BlackCat\Core\Database;
 use BlackCat\Database\Packages\SystemErrors\Dto\SystemErrorDto;
 use BlackCat\Database\Packages\SystemErrors\Mapper\SystemErrorDtoMapper;
 use BlackCat\Database\Packages\SystemErrors\Repository\SystemErrorRepository;
