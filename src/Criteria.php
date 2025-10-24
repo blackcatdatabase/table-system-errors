@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\SystemErrors;
 /**
  * Bezpečný builder WHERE/ORDER/LIMIT.
  * - whitelist filtrů: [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'fingerprint', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ]
- * - whitelist pro LIKE hledání: [ 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ]
+ * - whitelist pro LIKE hledání: [ 'level', 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ]
  */
 final class Criteria {
     /** @var array<string,mixed> */
@@ -61,7 +61,7 @@ final class Criteria {
 
         // fulltext/LIKE (přes whitelist)
         if ($this->search !== null) {
-            $searchCols = [ 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ];
+            $searchCols = [ 'level', 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ];
             $likeParts = [];
             foreach ($searchCols as $i=>$c) {
                 if ($c === '') continue;
