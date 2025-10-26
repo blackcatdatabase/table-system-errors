@@ -1,9 +1,9 @@
--- Auto-generated from schema-views-mysql.psd1 (map@mtime:2025-10-24T09:19:46Z)
+-- Auto-generated from schema-views-mysql.psd1 (map@38d5403)
 -- engine: mysql
 -- table:  system_errors
 -- Contract view for [system_errors]
--- Hides stack_trace and token; safe for dashboards and triage.
-CREATE OR REPLACE VIEW vw_system_errors AS
+-- Hides stack_trace and token; adds HEX/ip_pretty helpers.
+CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_system_errors AS
 SELECT
   id,
   level,
@@ -15,9 +15,12 @@ SELECT
   occurrences,
   user_id,
   ip_hash,
+  HEX(ip_hash) AS ip_hash_hex,
   ip_hash_key_version,
   ip_text,
   ip_bin,
+  HEX(ip_bin) AS ip_bin_hex,
+  COALESCE(ip_text, INET6_NTOA(ip_bin)) AS ip_pretty,
   user_agent,
   url,
   method,

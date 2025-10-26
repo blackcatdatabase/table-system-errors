@@ -1,8 +1,8 @@
--- Auto-generated from schema-views-postgres.psd1 (map@mtime:2025-10-24T09:45:40Z)
+-- Auto-generated from schema-views-postgres.psd1 (map@38d5403)
 -- engine: postgres
 -- table:  system_errors
 -- Contract view for [system_errors]
--- Hides stack_trace and token; safe for dashboards and triage.
+-- Hides stack_trace/token; adds hex helpers and ip_pretty (from inet).
 CREATE OR REPLACE VIEW vw_system_errors AS
 SELECT
   id,
@@ -15,9 +15,12 @@ SELECT
   occurrences,
   user_id,
   ip_hash,
+  encode(ip_hash, 'hex') AS ip_hash_hex,
   ip_hash_key_version,
   ip_text,
+  ip_text::text AS ip_pretty,
   ip_bin,
+  encode(ip_bin, 'hex') AS ip_bin_hex,
   user_agent,
   url,
   method,

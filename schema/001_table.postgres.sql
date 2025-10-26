@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@mtime:2025-10-24T09:46:38Z)
+-- Auto-generated from schema-map-postgres.psd1 (map@38d5403)
 -- engine: postgres
 -- table:  system_errors
 CREATE TABLE IF NOT EXISTS system_errors (
@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS system_errors (
   context JSONB NULL,
   fingerprint VARCHAR(64) NULL,
   occurrences INTEGER NOT NULL DEFAULT 1,
+  CONSTRAINT chk_system_errors_occurrences CHECK (occurrences >= 0),
   user_id BIGINT NULL,
   ip_hash BYTEA NULL,
   ip_hash_key_version VARCHAR(64) NULL,
@@ -28,5 +29,6 @@ CREATE TABLE IF NOT EXISTS system_errors (
   created_at TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   last_seen TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   CONSTRAINT chk_err_level CHECK (level IN ('notice','warning','error','critical')),
-  CONSTRAINT uq_err_fp UNIQUE (fingerprint)
+  CONSTRAINT uq_err_fp UNIQUE (fingerprint),
+  CONSTRAINT chk_system_errors_http_status CHECK (http_status IS NULL OR http_status >= 0)
 );
