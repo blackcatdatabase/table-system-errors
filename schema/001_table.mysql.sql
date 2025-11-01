@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-mysql.psd1 (map@38d5403)
+-- Auto-generated from schema-map-mysql.psd1 (map@c5e4097)
 -- engine: mysql
 -- table:  system_errors
 CREATE TABLE IF NOT EXISTS system_errors (
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS system_errors (
   ip_bin VARBINARY(16) NULL,
   user_agent VARCHAR(1024) NULL,
   url VARCHAR(2048) NULL,
-  method VARCHAR(10) NULL,
+  `method` VARCHAR(10) NULL,
   http_status SMALLINT UNSIGNED NULL,
   resolved BOOLEAN NOT NULL DEFAULT 0,
   resolved_by BIGINT UNSIGNED NULL,

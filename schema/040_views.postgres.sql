@@ -1,4 +1,4 @@
--- Auto-generated from schema-views-postgres.psd1 (map@38d5403)
+-- Auto-generated from schema-views-postgres.psd1 (map@c5e4097)
 -- engine: postgres
 -- table:  system_errors
 -- Contract view for [system_errors]
@@ -11,6 +11,7 @@ SELECT
   exception_class,
   file,
   line,
+  context,
   fingerprint,
   occurrences,
   user_id,
@@ -29,6 +30,5 @@ SELECT
   resolved_by,
   resolved_at,
   created_at,
-  last_seen,
-  context
+  last_seen
 FROM system_errors;

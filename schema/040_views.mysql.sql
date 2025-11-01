@@ -1,9 +1,9 @@
--- Auto-generated from schema-views-mysql.psd1 (map@38d5403)
+-- Auto-generated from schema-views-mysql.psd1 (map@c5e4097)
 -- engine: mysql
 -- table:  system_errors
 -- Contract view for [system_errors]
 -- Hides stack_trace and token; adds HEX/ip_pretty helpers.
-CREATE OR REPLACE SQL SECURITY INVOKER VIEW vw_system_errors AS
+CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_system_errors AS
 SELECT
   id,
   level,
@@ -11,24 +11,23 @@ SELECT
   exception_class,
   file,
   line,
+  context,
   fingerprint,
   occurrences,
   user_id,
   ip_hash,
-  HEX(ip_hash) AS ip_hash_hex,
+  CAST(LPAD(HEX(ip_hash), 64, '0')  AS CHAR(64)) AS ip_hash_hex,
   ip_hash_key_version,
   ip_text,
-  ip_bin,
-  HEX(ip_bin) AS ip_bin_hex,
-  COALESCE(ip_text, INET6_NTOA(ip_bin)) AS ip_pretty,
+  CAST(LPAD(HEX(ip_bin), 32, '0') AS CHAR(32)) AS ip_bin_hex,
+  CAST(COALESCE(INET6_NTOA(ip_bin), ip_text) AS CHAR(39)) AS ip_pretty,
   user_agent,
   url,
-  method,
+  `method`,
   http_status,
   resolved,
   resolved_by,
   resolved_at,
   created_at,
-  last_seen,
-  context
+  last_seen
 FROM system_errors;
