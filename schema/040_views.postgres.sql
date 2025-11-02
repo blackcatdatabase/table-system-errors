@@ -1,4 +1,4 @@
--- Auto-generated from schema-views-postgres.psd1 (map@c5e4097)
+-- Auto-generated from schema-views-postgres.psd1 (map@db2f8b8)
 -- engine: postgres
 -- table:  system_errors
 -- Contract view for [system_errors]
@@ -16,12 +16,12 @@ SELECT
   occurrences,
   user_id,
   ip_hash,
-  encode(ip_hash, 'hex') AS ip_hash_hex,
+  UPPER(encode(ip_hash,'hex'))::char(32) AS ip_hash_hex,
   ip_hash_key_version,
   ip_text,
-  ip_text::text AS ip_pretty,
+  COALESCE(NULLIF(ip_text,''), bc_compat.inet6_ntoa(ip_bin))::varchar(39) AS ip_pretty,
   ip_bin,
-  encode(ip_bin, 'hex') AS ip_bin_hex,
+  UPPER(encode(ip_bin,'hex'))::char(32) AS ip_bin_hex,
   user_agent,
   url,
   method,
