@@ -1,4 +1,35 @@
--- Auto-generated from schema-views-postgres.psd1 (map@9d3471b)
+-- Auto-generated from schema-views-postgres.psd1 (map@62c9c93)
+-- engine: postgres
+-- table:  system_errors_top_fingerprints
+-- Top fingerprints by total occurrences
+CREATE OR REPLACE VIEW vw_system_errors_top_fingerprints AS
+SELECT
+  fingerprint,
+  MAX(message) AS sample_message,
+  SUM(occurrences) AS occurrences,
+  MIN(created_at) AS first_seen,
+  MAX(last_seen)  AS last_seen,
+  BOOL_OR(resolved) AS any_resolved,
+  COUNT(*) AS rows_count
+FROM system_errors
+GROUP BY fingerprint
+ORDER BY occurrences DESC, last_seen DESC;
+
+-- Auto-generated from schema-views-postgres.psd1 (map@62c9c93)
+-- engine: postgres
+-- table:  system_errors_daily
+-- System errors per day and level
+CREATE OR REPLACE VIEW vw_system_errors_daily AS
+SELECT
+  date_trunc(''day'', created_at) AS day,
+  level,
+  COUNT(*) AS count
+FROM system_errors
+GROUP BY 1,2
+ORDER BY day DESC, level;
+
+
+-- Auto-generated from schema-views-postgres.psd1 (map@62c9c93)
 -- engine: postgres
 -- table:  system_errors
 -- Contract view for [system_errors]
@@ -32,35 +63,4 @@ SELECT
   created_at,
   last_seen
 FROM system_errors;
-
--- Auto-generated from schema-views-postgres.psd1 (map@9d3471b)
--- engine: postgres
--- table:  system_errors_daily
--- System errors per day and level
-CREATE OR REPLACE VIEW vw_system_errors_daily AS
-SELECT
-  date_trunc(''day'', created_at) AS day,
-  level,
-  COUNT(*) AS count
-FROM system_errors
-GROUP BY 1,2
-ORDER BY day DESC, level;
-
-
--- Auto-generated from schema-views-postgres.psd1 (map@9d3471b)
--- engine: postgres
--- table:  system_errors_top_fingerprints
--- Top fingerprints by total occurrences
-CREATE OR REPLACE VIEW vw_system_errors_top_fingerprints AS
-SELECT
-  fingerprint,
-  MAX(message) AS sample_message,
-  SUM(occurrences) AS occurrences,
-  MIN(created_at) AS first_seen,
-  MAX(last_seen)  AS last_seen,
-  BOOL_OR(resolved) AS any_resolved,
-  COUNT(*) AS rows_count
-FROM system_errors
-GROUP BY fingerprint
-ORDER BY occurrences DESC, last_seen DESC;
 
