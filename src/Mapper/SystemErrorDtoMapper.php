@@ -17,7 +17,7 @@ use BlackCat\Database\Support\DtoHydrator;
 final class SystemErrorDtoMapper
 {
     /** @var array<string,string> Column -> DTO property */
-    private const COL_TO_PROP = [ 'exception_class' => 'exceptionClass', 'stack_trace' => 'stackTrace', 'user_id' => 'userId', 'ip_hash' => 'ipHash', 'ip_hash_key_version' => 'ipHashKeyVersion', 'ip_text' => 'ipText', 'ip_bin' => 'ipBin', 'user_agent' => 'userAgent', 'http_status' => 'httpStatus', 'resolved_by' => 'resolvedBy', 'resolved_at' => 'resolvedAt', 'created_at' => 'createdAt', 'last_seen' => 'lastSeen' ];
+    private const COL_TO_PROP = [ 'id' => 'id', 'level' => 'level', 'message' => 'message', 'exception_class' => 'exceptionClass', 'file' => 'file', 'line' => 'line', 'stack_trace' => 'stackTrace', 'token' => 'token', 'context' => 'context', 'fingerprint' => 'fingerprint', 'occurrences' => 'occurrences', 'user_id' => 'userId', 'ip_hash' => 'ipHash', 'ip_hash_key_version' => 'ipHashKeyVersion', 'ip_text' => 'ipText', 'ip_bin' => 'ipBin', 'user_agent' => 'userAgent', 'url' => 'url', 'method' => 'method', 'http_status' => 'httpStatus', 'resolved' => 'resolved', 'resolved_by' => 'resolvedBy', 'resolved_at' => 'resolvedAt', 'created_at' => 'createdAt', 'last_seen' => 'lastSeen' ];
 
     /** @var string[] */
     private const BOOL_COLS   = [ 'resolved' ];
