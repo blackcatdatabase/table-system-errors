@@ -1,7 +1,7 @@
--- Auto-generated from joins-mysql.psd1 (map@mtime:2025-11-27T17:49:37Z)
+-- Auto-generated from joins-mysql.yaml (map@94ebe6c)
 -- engine: mysql
 -- view:   system_errors_daily
--- System errors per day and level
+
 CREATE OR REPLACE ALGORITHM=TEMPTABLE SQL SECURITY INVOKER VIEW vw_system_errors_daily AS
 SELECT
   DATE(created_at) AS day,
@@ -11,10 +11,10 @@ FROM system_errors
 GROUP BY DATE(created_at), level
 ORDER BY day DESC, level;
 
--- Auto-generated from joins-mysql.psd1 (map@mtime:2025-11-27T17:49:37Z)
+-- Auto-generated from joins-mysql.yaml (map@94ebe6c)
 -- engine: mysql
 -- view:   system_errors_top_fingerprints
--- Top fingerprints by total occurrences
+
 CREATE OR REPLACE ALGORITHM=TEMPTABLE SQL SECURITY INVOKER VIEW vw_system_errors_top_fingerprints AS
 SELECT
   fingerprint,

@@ -1,18 +1,18 @@
--- Auto-generated from joins-postgres.psd1 (map@mtime:2025-11-27T17:17:38Z)
+-- Auto-generated from joins-postgres.yaml (map@94ebe6c)
 -- engine: postgres
 -- view:   system_errors_daily
 
 -- System errors per day and level
 CREATE OR REPLACE VIEW vw_system_errors_daily AS
 SELECT
-  date_trunc(''day'', created_at) AS day,
+  date_trunc($$day$$, created_at) AS day,
   level,
   COUNT(*) AS count
 FROM system_errors
-GROUP BY date_trunc(''day'', created_at), level
+GROUP BY date_trunc($$day$$, created_at), level
 ORDER BY day DESC, level;
 
--- Auto-generated from joins-postgres.psd1 (map@mtime:2025-11-27T17:17:38Z)
+-- Auto-generated from joins-postgres.yaml (map@94ebe6c)
 -- engine: postgres
 -- view:   system_errors_top_fingerprints
 
