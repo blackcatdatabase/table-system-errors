@@ -1,4 +1,4 @@
--- Auto-generated from joins-mysql.yaml (map@94ebe6c)
+-- Auto-generated from joins-mysql.yaml (map@85230ed)
 -- engine: mysql
 -- view:   system_errors_daily
 
@@ -11,7 +11,7 @@ FROM system_errors
 GROUP BY DATE(created_at), level
 ORDER BY day DESC, level;
 
--- Auto-generated from joins-mysql.yaml (map@94ebe6c)
+-- Auto-generated from joins-mysql.yaml (map@85230ed)
 -- engine: mysql
 -- view:   system_errors_top_fingerprints
 
