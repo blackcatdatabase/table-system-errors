@@ -1,4 +1,4 @@
--- Auto-generated from joins-postgres.yaml (map@85230ed)
+-- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
 -- engine: postgres
 -- view:   system_errors_daily
 
@@ -12,7 +12,7 @@ FROM system_errors
 GROUP BY date_trunc($$day$$, created_at), level
 ORDER BY day DESC, level;
 
--- Auto-generated from joins-postgres.yaml (map@85230ed)
+-- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
 -- engine: postgres
 -- view:   system_errors_top_fingerprints
 
