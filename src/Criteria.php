@@ -38,7 +38,7 @@ final class Criteria extends BaseCriteria
     /** Columns used for full-text LIKE/ILIKE searches. */
     protected function searchable(): array
     {
-        return [ 'level', 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ];
+        return [ 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ];
     }
 
 /** Columns allowed in ORDER BY (falls back to filterable() when empty). */
