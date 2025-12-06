@@ -32,15 +32,79 @@ final class SystemErrorsModule implements ModuleInterface
         $table = SqlIdentifier::qi($db, $this->table());
         $view  = SqlIdentifier::qi($db, self::contractView());
 
+        if ($d->isMysql()) {
+            $createViewSql = <<<'SQL'
+CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_system_errors AS
+SELECT
+  id,
+  level,
+  message,
+  exception_class,
+  file,
+  line,
+  context,
+  fingerprint,
+  occurrences,
+  user_id,
+  ip_hash,
+  CAST(LPAD(HEX(ip_hash), 64, '0')  AS CHAR(64)) AS ip_hash_hex,
+  ip_hash_key_version,
+  ip_text,
+  ip_bin,
+  CAST(LPAD(HEX(ip_bin), 32, '0') AS CHAR(32)) AS ip_bin_hex,
+  CAST(COALESCE(INET6_NTOA(ip_bin), ip_text) AS CHAR(39)) AS ip_pretty,
+  user_agent,
+  url,
+  `method`,
+  http_status,
+  resolved,
+  resolved_by,
+  resolved_at,
+  created_at,
+  last_seen
+FROM system_errors;
+SQL;
+        } else {
+            $createViewSql = <<<'SQL'
+CREATE OR REPLACE VIEW vw_system_errors AS
+SELECT
+  id,
+  level,
+  message,
+  exception_class,
+  file,
+  line,
+  context,
+  fingerprint,
+  occurrences,
+  user_id,
+  ip_hash,
+  UPPER(encode(ip_hash,'hex')) AS ip_hash_hex,
+  ip_hash_key_version,
+  ip_text,
+  COALESCE(NULLIF(ip_text,''), bc_compat.inet6_ntoa(ip_bin))::varchar(39) AS ip_pretty,
+  ip_bin,
+  UPPER(encode(ip_bin,'hex')) AS ip_bin_hex,
+  user_agent,
+  url,
+  method,
+  http_status,
+  resolved,
+  resolved_by,
+  resolved_at,
+  created_at,
+  last_seen
+FROM system_errors;
+SQL;
+        }
+
         if (\class_exists('\\BlackCat\\Database\\Support\\DdlGuard')) {
-            (new \BlackCat\Database\Support\DdlGuard($db, $d))->applyCreateView(
-                "CREATE VIEW {$view} AS SELECT * FROM {$table}"
-            );
+            (new \BlackCat\Database\Support\DdlGuard($db, $d))->applyCreateView($createViewSql);
         } else {
             // Prefer CREATE OR REPLACE VIEW (gentle on dependencies)
-            $sql = "CREATE OR REPLACE VIEW {$view} AS SELECT * FROM {$table}";
-            $db->exec($sql);
+            $db->exec($createViewSql);
         }
+
     }
 
     public function upgrade(Database $db, SqlDialect $d, string $from): void
@@ -67,8 +131,15 @@ final class SystemErrorsModule implements ModuleInterface
         $hasTable = SchemaIntrospector::hasTable($db, $d, $table);
         $hasView  = SchemaIntrospector::hasView($db, $d, $view);
 
-        // Quick index/FK check – generator injects names (case-sensitive per DB)
+        // Quick index/FK check â€“ generator injects names (case-sensitive per DB)
         $expectedIdx = [ 'idx_system_errors_last_seen' ];
+        if ($d->isMysql()) {
+            // Drop PG-only index naming patterns (e.g., GIN/GiST)
+            $expectedIdx = array_values(array_filter(
+                $expectedIdx,
+                static fn(string $n): bool => !str_starts_with($n, 'gin_') && !str_starts_with($n, 'gist_')
+            ));
+        }
         $expectedFk  = [ 'fk_err_resolved_by', 'fk_err_user' ];
 
         $haveIdx = $hasTable ? SchemaIntrospector::listIndexes($db, $d, $table)     : [];
