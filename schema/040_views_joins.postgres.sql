@@ -1,19 +1,5 @@
 -- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
 -- engine: postgres
--- view:   system_errors_daily
-
--- System errors per day and level
-CREATE OR REPLACE VIEW vw_system_errors_daily AS
-SELECT
-  date_trunc($$day$$, created_at) AS day,
-  level,
-  COUNT(*) AS count
-FROM system_errors
-GROUP BY date_trunc($$day$$, created_at), level
-ORDER BY day DESC, level;
-
--- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
--- engine: postgres
 -- view:   system_errors_top_fingerprints
 
 -- Top fingerprints by total occurrences
@@ -29,4 +15,3 @@ SELECT
 FROM system_errors
 GROUP BY fingerprint
 ORDER BY occurrences DESC, last_seen DESC;
-
