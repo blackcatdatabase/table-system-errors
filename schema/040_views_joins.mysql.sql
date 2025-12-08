@@ -1,5 +1,18 @@
 -- Auto-generated from joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
 -- engine: mysql
+-- view:   system_errors_daily
+
+CREATE OR REPLACE ALGORITHM=TEMPTABLE SQL SECURITY INVOKER VIEW vw_system_errors_daily AS
+SELECT
+  DATE(created_at) AS day,
+  level,
+  COUNT(*) AS count
+FROM system_errors
+GROUP BY DATE(created_at), level
+ORDER BY day DESC, level;
+
+-- Auto-generated from joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
+-- engine: mysql
 -- view:   system_errors_top_fingerprints
 
 CREATE OR REPLACE ALGORITHM=TEMPTABLE SQL SECURITY INVOKER VIEW vw_system_errors_top_fingerprints AS
@@ -14,3 +27,4 @@ SELECT
 FROM system_errors
 GROUP BY fingerprint
 ORDER BY occurrences DESC, last_seen DESC;
+
