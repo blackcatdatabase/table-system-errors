@@ -96,11 +96,11 @@ graph LR
 _No engine differences detected._
 
 ## Constraints Snapshot
-- `created_at` – default=CURRENT_TIMESTAMP(6)
-- `last_seen` – default=CURRENT_TIMESTAMP(6)
 - `level` – enum
 - `occurrences` – default=1
 - `resolved` – default=mysql: 0 / postgres: FALSE
+- `created_at` – default=CURRENT_TIMESTAMP(6)
+- `last_seen` – default=CURRENT_TIMESTAMP(6)
 
 ## Schema Files
 | File | Engine |
