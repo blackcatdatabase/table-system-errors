@@ -5,27 +5,27 @@ Application error/event log with grouping and resolution.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| context | JSON | YES |  | JSON context (structured). |
-| created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | First occurrence (UTC). |
+| context | mysql: JSON / postgres: JSONB | YES |  | JSON context (structured). |
+| created_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | First occurrence (UTC). |
 | exception_class | VARCHAR(255) | YES |  | Exception class name (if any). |
 | file | VARCHAR(1024) | YES |  | Source file path. |
 | fingerprint | VARCHAR(64) | YES |  | Deduplication fingerprint. |
 | http_status | SMALLINT | YES |  | HTTP status code. |
 | id | BIGINT | NO |  | Surrogate primary key. |
-| ip_bin | VARBINARY(16) | YES |  | Binary IP (if captured). |
-| ip_hash | BINARY(32) | YES |  | Hashed IP. |
+| ip_bin | mysql: VARBINARY(16) / postgres: BYTEA | YES |  | Binary IP (if captured). |
+| ip_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed IP. |
 | ip_hash_key_version | VARCHAR(64) | YES |  | Key version for ip_hash. |
 | ip_text | VARCHAR(45) | YES |  | Plaintext IP (if captured). |
-| last_seen | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Most recent occurrence (UTC). |
-| level | ENUM('notice','warning','error','critical') | NO |  | Severity level. (enum: notice, warning, error, critical) |
-| line | INT | YES |  | Source line number. |
+| last_seen | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Most recent occurrence (UTC). |
+| level | mysql: ENUM('notice','warning','error','critical') / postgres: TEXT | NO |  | Severity level. (enum: notice, warning, error, critical) |
+| line | mysql: INT / postgres: INTEGER | YES |  | Source line number. |
 | message | TEXT | NO |  | Error message. |
 | method | VARCHAR(10) | YES |  | HTTP method. |
-| occurrences | INT | NO | 1 | Aggregate count of occurrences. |
-| resolved | BOOLEAN | NO | 0 | Resolution flag. |
-| resolved_at | DATETIME(6) | YES |  | Resolution timestamp (UTC). |
+| occurrences | mysql: INT / postgres: INTEGER | NO | 1 | Aggregate count of occurrences. |
+| resolved | BOOLEAN | NO | FALSE | Resolution flag. |
+| resolved_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | YES |  | Resolution timestamp (UTC). |
 | resolved_by | BIGINT | YES |  | Resolver user id (FK users.id), optional. |
-| stack_trace | MEDIUMTEXT | YES |  | Long stack trace. |
+| stack_trace | mysql: MEDIUMTEXT / postgres: TEXT | YES |  | Long stack trace. |
 | token | VARCHAR(255) | YES |  | Correlated token/id. |
 | url | VARCHAR(2048) | YES |  | Request URL. |
 | user_agent | VARCHAR(1024) | YES |  | User agent string. |
