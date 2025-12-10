@@ -97,10 +97,10 @@ _No engine differences detected._
 
 ## Constraints Snapshot
 - `created_at` – default=CURRENT_TIMESTAMP(6)
-- `resolved` – default=mysql: 0 / postgres: FALSE
 - `last_seen` – default=CURRENT_TIMESTAMP(6)
 - `level` – enum
 - `occurrences` – default=1
+- `resolved` – default=mysql: 0 / postgres: FALSE
 
 ## Schema Files
 | File | Engine |
