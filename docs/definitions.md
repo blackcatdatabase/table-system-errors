@@ -22,7 +22,7 @@ Application error/event log with grouping and resolution.
 | message | TEXT | NO |  | Error message. |
 | method | VARCHAR(10) | YES |  | HTTP method. |
 | occurrences | mysql: INT / postgres: INTEGER | NO | 1 | Aggregate count of occurrences. |
-| resolved | BOOLEAN | NO | FALSE | Resolution flag. |
+| resolved | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Resolution flag. |
 | resolved_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | YES |  | Resolution timestamp (UTC). |
 | resolved_by | BIGINT | YES |  | Resolver user id (FK users.id), optional. |
 | stack_trace | mysql: MEDIUMTEXT / postgres: TEXT | YES |  | Long stack trace. |
@@ -87,9 +87,9 @@ Foreign keys:
 ## Views
 | View | Engine | Flags | File |
 | --- | --- | --- | --- |
-| vw_system_errors | mysql | algorithm=MERGE, security=INVOKER | [schema\040_views.mysql.sql](schema\040_views.mysql.sql) |
-| vw_system_errors_daily | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_system_errors_top_fingerprints | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_system_errors | postgres |  | [schema\040_views.postgres.sql](schema\040_views.postgres.sql) |
-| vw_system_errors_daily | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
-| vw_system_errors_top_fingerprints | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
+| vw_system_errors | mysql | algorithm=MERGE, security=INVOKER | [../schema/040_views.mysql.sql](../schema/040_views.mysql.sql) |
+| vw_system_errors_daily | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_system_errors_top_fingerprints | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_system_errors | postgres |  | [../schema/040_views.postgres.sql](../schema/040_views.postgres.sql) |
+| vw_system_errors_daily | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
+| vw_system_errors_top_fingerprints | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
