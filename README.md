@@ -100,7 +100,7 @@ _No engine differences detected._
 - `last_seen` – default=CURRENT_TIMESTAMP(6)
 - `level` – enum
 - `occurrences` – default=1
-- `resolved` – default=FALSE
+- `resolved` – default=mysql: 0 / postgres: FALSE
 
 ## Schema Files
 | File | Engine |
