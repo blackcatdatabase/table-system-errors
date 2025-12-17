@@ -252,6 +252,7 @@ use OrderByTools, PkTools, RepositoryHelpers;
           ));
           if (!$rows) { return 0; }
 
+          /** @var list<string> $updCols */
           $updCols = [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ];
           if ($updCols && $soft && !in_array($soft, $updCols, true)) { $updCols[] = $soft; }
 
