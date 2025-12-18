@@ -151,7 +151,7 @@ use OrderByTools, PkTools, RepositoryHelpers;
 
         $keys = $this->resolveUpsertKeys();
 
-        $updCols = [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ];
+        $updCols = [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ];
         $updCols = array_values(array_diff($updCols, array_merge($this->pkColumns(Definitions::class), $keys)));
 
         // Revive policy
@@ -222,7 +222,7 @@ use OrderByTools, PkTools, RepositoryHelpers;
         $helperKeys = $this->resolveUpsertKeys();
         if ($helperKeys && class_exists(\BlackCat\Database\Support\BulkUpsertHelper::class)) {
           $bulk = new \BlackCat\Database\Support\BulkUpsertHelper($this->db, \BlackCat\Database\Packages\SystemErrors\Definitions::class);
-          $bulk->upsertMany($rows, $helperKeys, [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ]);
+          $bulk->upsertMany($rows, $helperKeys, [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ]);
           return count($rows);
         }
 
@@ -253,7 +253,7 @@ use OrderByTools, PkTools, RepositoryHelpers;
           if (!$rows) { return 0; }
 
           /** @var list<string> $updCols */
-          $updCols = [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ];
+          $updCols = [ 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'last_seen' ];
           if ($updCols && $soft && !in_array($soft, $updCols, true)) { $updCols[] = $soft; }
 
           $bulk = new \BlackCat\Database\Support\BulkUpsertHelper($this->db, \BlackCat\Database\Packages\SystemErrors\Definitions::class);
