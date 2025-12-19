@@ -1,9 +1,9 @@
--- Auto-generated from schema-views-postgres.yaml (map@sha1:3C365C10BD489376A27944AE10F143E1BE4D3BCF)
+-- Auto-generated from schema-views-postgres.yaml (map@sha1:5C6FE96DC2067A978A357A1DCB8631B46C71D429)
 -- engine: postgres
 -- table:  system_errors
 
 -- Contract view for [system_errors]
--- Hides stack_trace/token; adds hex helpers and ip_pretty (from inet).
+-- Hides stack_trace/token; adds ip_hash_hex helper.
 CREATE OR REPLACE VIEW vw_system_errors AS
 SELECT
   id,
@@ -19,10 +19,6 @@ SELECT
   ip_hash,
   UPPER(encode(ip_hash,'hex')) AS ip_hash_hex,
   ip_hash_key_version,
-  ip_text,
-  COALESCE(NULLIF(ip_text,''), bc_compat.inet6_ntoa(ip_bin))::varchar(39) AS ip_pretty,
-  ip_bin,
-  UPPER(encode(ip_bin,'hex')) AS ip_bin_hex,
   user_agent,
   url,
   method,

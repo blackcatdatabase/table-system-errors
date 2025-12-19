@@ -28,8 +28,6 @@ Application error/event log with grouping and resolution.
 | resolved_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | YES |  | Resolution timestamp (UTC). |  |
 | created_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | First occurrence (UTC). |  |
 | last_seen | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Most recent occurrence (UTC). |  |
-| ip_bin |  | YES |  | Binary IP (if captured). |  |
-| ip_text |  | YES |  | Plaintext IP (if captured). |  |
 
 ## Engine Details
 

@@ -1,9 +1,9 @@
--- Auto-generated from schema-views-mysql.yaml (map@sha1:B3C579FF17AC186C47D2C4AC86B0738DB2308BF2)
+-- Auto-generated from schema-views-mysql.yaml (map@sha1:39CF23914A48753BF55EEB1F38DDBA21AB1DBBB7)
 -- engine: mysql
 -- table:  system_errors
 
 -- Contract view for [system_errors]
--- Hides stack_trace and token; adds HEX/ip_pretty helpers.
+-- Hides stack_trace and token; adds ip_hash_hex helper.
 CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_system_errors AS
 SELECT
   id,
@@ -19,10 +19,6 @@ SELECT
   ip_hash,
   CAST(LPAD(HEX(ip_hash), 64, '0')  AS CHAR(64)) AS ip_hash_hex,
   ip_hash_key_version,
-  ip_text,
-  ip_bin,
-  CAST(LPAD(HEX(ip_bin), 32, '0') AS CHAR(32)) AS ip_bin_hex,
-  CAST(COALESCE(INET6_NTOA(ip_bin), ip_text) AS CHAR(39)) AS ip_pretty,
   user_agent,
   url,
   `method`,
