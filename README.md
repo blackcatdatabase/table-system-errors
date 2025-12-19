@@ -43,7 +43,7 @@
 ## At a Glance
 | Metric | Count |
 | --- | --- |
-| Columns | **27** |
+| Columns | **25** |
 | Indexes | **9** |
 | Foreign keys | **4** |
 | Unique keys | **3** |
