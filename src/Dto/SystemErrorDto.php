@@ -24,8 +24,6 @@ final class SystemErrorDto implements \JsonSerializable {
         public readonly ?int $userId,
         #[\SensitiveParameter] public readonly ?string $ipHash,
         public readonly ?string $ipHashKeyVersion,
-        public readonly ?string $ipText,
-        public readonly ?string $ipBin,
         public readonly ?string $userAgent,
         public readonly ?string $url,
         public readonly ?string $method,

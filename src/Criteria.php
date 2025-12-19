@@ -32,20 +32,20 @@ final class Criteria extends BaseCriteria
     /** Columns that are safe to use inside WHERE filters. */
     protected function filterable(): array
     {
-        return [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'fingerprint', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ];
+        return [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'fingerprint', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ];
     }
 
     /** Columns used for full-text LIKE/ILIKE searches. */
     protected function searchable(): array
     {
-        return [ 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method' ];
+        return [ 'message', 'exception_class', 'file', 'stack_trace', 'token', 'fingerprint', 'ip_hash_key_version', 'user_agent', 'url', 'method' ];
     }
 
-/** Columns allowed in ORDER BY (falls back to filterable() when empty). */
-protected function sortable(): array
-{
-    return [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'fingerprint', 'occurrences', 'user_id', 'ip_hash_key_version', 'ip_text', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ];
-}
+    /** Columns allowed in ORDER BY (falls back to filterable() when empty). */
+    protected function sortable(): array
+    {
+        return [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'fingerprint', 'occurrences', 'user_id', 'ip_hash_key_version', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ];
+    }
 
     /**
      * Whitelist of joinable entities (for safe ->join() usage):

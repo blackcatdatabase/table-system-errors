@@ -8,7 +8,7 @@ final class Definitions {
     public static function table(): string { return 'system_errors'; }
     public static function contractView(): string { return 'vw_system_errors'; }
     /** @return string[] */
-    public static function columns(): array { return [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'fingerprint', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'ip_text', 'ip_bin', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ]; }
+    public static function columns(): array { return [ 'id', 'level', 'message', 'exception_class', 'file', 'line', 'stack_trace', 'token', 'context', 'fingerprint', 'occurrences', 'user_id', 'ip_hash', 'ip_hash_key_version', 'user_agent', 'url', 'method', 'http_status', 'resolved', 'resolved_by', 'resolved_at', 'created_at', 'last_seen' ]; }
 
     /** @var array<string,array<int,string>> */
     public const STATUS_TRANSITIONS = [];

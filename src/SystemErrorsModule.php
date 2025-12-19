@@ -49,10 +49,6 @@ SELECT
   ip_hash,
   CAST(LPAD(HEX(ip_hash), 64, '0')  AS CHAR(64)) AS ip_hash_hex,
   ip_hash_key_version,
-  ip_text,
-  ip_bin,
-  CAST(LPAD(HEX(ip_bin), 32, '0') AS CHAR(32)) AS ip_bin_hex,
-  CAST(COALESCE(INET6_NTOA(ip_bin), ip_text) AS CHAR(39)) AS ip_pretty,
   user_agent,
   url,
   `method`,
@@ -81,10 +77,6 @@ SELECT
   ip_hash,
   UPPER(encode(ip_hash,'hex')) AS ip_hash_hex,
   ip_hash_key_version,
-  ip_text,
-  COALESCE(NULLIF(ip_text,''), bc_compat.inet6_ntoa(ip_bin))::varchar(39) AS ip_pretty,
-  ip_bin,
-  UPPER(encode(ip_bin,'hex')) AS ip_bin_hex,
   user_agent,
   url,
   method,
@@ -131,8 +123,8 @@ SQL;
         $hasTable = SchemaIntrospector::hasTable($db, $d, $table);
         $hasView  = SchemaIntrospector::hasView($db, $d, $view);
 
-        // Quick index/FK check â€“ generator injects names (case-sensitive per DB)
-        $expectedIdx = [ 'idx_system_errors_last_seen' ];
+        // Quick index/FK check - generator injects names (case-sensitive per DB)
+        $expectedIdx = [ 'idx_err_ip', 'idx_err_level', 'idx_err_resolved', 'idx_err_time', 'idx_err_user', 'idx_system_errors_last_seen' ];
         if ($d->isMysql()) {
             // Drop PG-only index naming patterns (e.g., GIN/GiST)
             $expectedIdx = array_values(array_filter(
@@ -165,7 +157,7 @@ SQL;
             'columns'     => Definitions::columns(),
             'version'     => $this->version(),
             'dialects'    => [ 'mysql', 'postgres' ],
-            'indexes'     => [ 'idx_system_errors_last_seen' ],
+            'indexes'     => [ 'idx_err_ip', 'idx_err_level', 'idx_err_resolved', 'idx_err_time', 'idx_err_user', 'idx_system_errors_last_seen' ],
             'foreignKeys' => [ 'fk_err_resolved_by', 'fk_err_user' ],
         ];
     }

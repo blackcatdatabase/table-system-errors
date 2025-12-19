@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-mysql.yaml (map@sha1:09DF9CA612D1573E058190CC207FA257C05AEC1F)
+-- Auto-generated from schema-map-mysql.yaml (map@sha1:0D716345C0228A9FD8972A3D31574000D05317DB)
 -- engine: mysql
 -- table:  system_errors
 
@@ -17,8 +17,6 @@ CREATE TABLE IF NOT EXISTS system_errors (
   user_id BIGINT UNSIGNED NULL,
   ip_hash BINARY(32) NULL,
   ip_hash_key_version VARCHAR(64) NULL,
-  ip_text VARCHAR(45) NULL,
-  ip_bin VARBINARY(16) NULL,
   user_agent VARCHAR(1024) NULL,
   url VARCHAR(2048) NULL,
   `method` VARCHAR(10) NULL,
